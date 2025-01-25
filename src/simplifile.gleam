@@ -267,6 +267,7 @@ pub fn file_info_type(from file_info: FileInfo) -> FileType {
 /// See `link_info` if you want to get information about a symlink instead.
 @external(erlang, "simplifile_erl", "file_info")
 @external(javascript, "./simplifile_js.mjs", "fileInfo")
+@external(go, "", "FileInfo")
 pub fn file_info(filepath: String) -> Result(FileInfo, FileError)
 
 /// Get information about a file at a given path
@@ -277,6 +278,7 @@ pub fn file_info(filepath: String) -> Result(FileInfo, FileError)
 /// See `file_info` if you want to follow symlinks instead.
 @external(erlang, "simplifile_erl", "link_info")
 @external(javascript, "./simplifile_js.mjs", "linkInfo")
+@external(go, "", "LinkInfo")
 pub fn link_info(filepath: String) -> Result(FileInfo, FileError)
 
 /// Read a files contents as a string
@@ -321,6 +323,7 @@ pub fn write(
 /// ```
 @external(erlang, "simplifile_erl", "delete")
 @external(javascript, "./simplifile_js.mjs", "delete_")
+@external(go, "", "Delete")
 pub fn delete(file_or_dir_at path: String) -> Result(Nil, FileError)
 
 /// Delete all files/directories specified in a list of paths.
@@ -362,6 +365,7 @@ pub fn append(
 /// ```
 @external(erlang, "simplifile_erl", "read_bits")
 @external(javascript, "./simplifile_js.mjs", "readBits")
+@external(go, "", "ReadBits")
 pub fn read_bits(from filepath: String) -> Result(BitArray, FileError)
 
 /// Write a bitstring to a file at the given path
@@ -372,6 +376,7 @@ pub fn read_bits(from filepath: String) -> Result(BitArray, FileError)
 ///
 @external(erlang, "simplifile_erl", "write_bits")
 @external(javascript, "./simplifile_js.mjs", "writeBits")
+@external(go, "", "WriteBits")
 pub fn write_bits(
   to filepath: String,
   bits bits: BitArray,
@@ -385,6 +390,7 @@ pub fn write_bits(
 ///
 @external(erlang, "simplifile_erl", "append_bits")
 @external(javascript, "./simplifile_js.mjs", "appendBits")
+@external(go, "", "AppendBits")
 pub fn append_bits(
   to filepath: String,
   bits bits: BitArray,
@@ -399,6 +405,7 @@ pub fn append_bits(
 /// ```
 @external(erlang, "simplifile_erl", "is_directory")
 @external(javascript, "./simplifile_js.mjs", "isDirectory")
+@external(go, "", "IsDirectory")
 pub fn is_directory(filepath: String) -> Result(Bool, FileError)
 
 /// Create a directory at the provided filepath. Returns an error if
@@ -410,6 +417,7 @@ pub fn is_directory(filepath: String) -> Result(Bool, FileError)
 /// ```
 @external(erlang, "simplifile_erl", "create_directory")
 @external(javascript, "./simplifile_js.mjs", "createDirectory")
+@external(go, "", "CreateDirectory")
 pub fn create_directory(filepath: String) -> Result(Nil, FileError)
 
 /// Create a symbolic link called symlink pointing to target.
@@ -425,6 +433,7 @@ pub fn create_directory(filepath: String) -> Result(Nil, FileError)
 /// ```
 @external(erlang, "simplifile_erl", "create_symlink")
 @external(javascript, "./simplifile_js.mjs", "createSymlink")
+@external(go, "", "CreateSymlink")
 pub fn create_symlink(
   to target: String,
   from symlink: String,
@@ -440,6 +449,7 @@ pub fn create_symlink(
 ///
 @external(erlang, "simplifile_erl", "read_directory")
 @external(javascript, "./simplifile_js.mjs", "readDirectory")
+@external(go, "", "ReadDirectory")
 pub fn read_directory(at path: String) -> Result(List(String), FileError)
 
 /// Checks if the file at the provided filepath exists and is a file.
@@ -452,6 +462,7 @@ pub fn read_directory(at path: String) -> Result(List(String), FileError)
 ///
 @external(erlang, "simplifile_erl", "is_file")
 @external(javascript, "./simplifile_js.mjs", "isFile")
+@external(go, "", "IsFile")
 pub fn is_file(filepath: String) -> Result(Bool, FileError)
 
 /// Checks if the file at the provided filepath exists and is a symbolic link.
@@ -464,6 +475,7 @@ pub fn is_file(filepath: String) -> Result(Bool, FileError)
 ///
 @external(erlang, "simplifile_erl", "is_symlink")
 @external(javascript, "./simplifile_js.mjs", "isSymlink")
+@external(go, "", "IsSymlink")
 pub fn is_symlink(filepath: String) -> Result(Bool, FileError)
 
 /// Creates an empty file at the given filepath. Returns an `Error(Eexist)`
@@ -495,6 +507,7 @@ pub fn create_directory_all(dirpath: String) -> Result(Nil, FileError) {
 
 @external(erlang, "simplifile_erl", "create_dir_all")
 @external(javascript, "./simplifile_js.mjs", "createDirAll")
+@external(go, "", "doCreateDirAll")
 fn do_create_dir_all(dirpath: String) -> Result(Nil, FileError)
 
 /// Copy a file or a directory to a new path. Copies directories recursively.
@@ -526,6 +539,7 @@ pub fn copy_file(at src: String, to dest: String) -> Result(Nil, FileError) {
 
 @external(erlang, "file", "copy")
 @external(javascript, "./simplifile_js.mjs", "copyFile")
+@external(go, "", "doCopyFile")
 fn do_copy_file(src: String, dest: String) -> Result(Int, FileError)
 
 /// Rename a file at a given path to another path.
@@ -533,11 +547,13 @@ fn do_copy_file(src: String, dest: String) -> Result(Int, FileError)
 @deprecated("This function can move a file or a directory, so it's being renamed `rename`.")
 @external(erlang, "simplifile_erl", "rename_file")
 @external(javascript, "./simplifile_js.mjs", "renameFile")
+@external(go, "", "Rename")
 pub fn rename_file(at src: String, to dest: String) -> Result(Nil, FileError)
 
 /// Rename a file or directory.
 @external(erlang, "simplifile_erl", "rename_file")
 @external(javascript, "./simplifile_js.mjs", "renameFile")
+@external(go, "", "Rename")
 pub fn rename(at src: String, to dest: String) -> Result(Nil, FileError)
 
 /// Copy a directory recursively
@@ -711,6 +727,7 @@ pub fn set_permissions(
 /// ```
 @external(erlang, "simplifile_erl", "set_permissions_octal")
 @external(javascript, "./simplifile_js.mjs", "setPermissionsOctal")
+@external(go, "", "SetPermissionsOctal")
 pub fn set_permissions_octal(
   for_file_at filepath: String,
   to permissions: Int,
@@ -719,6 +736,7 @@ pub fn set_permissions_octal(
 /// Returns the current working directory
 ///
 @external(javascript, "./simplifile_js.mjs", "currentDirectory")
+@external(go, "", "CurrentDirectory")
 pub fn current_directory() -> Result(String, FileError) {
   erl_do_current_directory()
   |> result.map(string.from_utf_codepoints)
